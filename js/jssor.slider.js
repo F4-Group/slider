@@ -6,9 +6,9 @@
 *
 * Licensed under the MIT license:
 * http://www.opensource.org/licenses/MIT
-* 
+*
 * TERMS OF USE - Jssor.Slider
-* 
+*
 * Copyright 2014 Jssor
 *
 * Permission is hereby granted, free of charge, to any person obtaining
@@ -18,10 +18,10 @@
 * distribute, sublicense, and/or sell copies of the Software, and to
 * permit persons to whom the Software is furnished to do so, subject to
 * the following conditions:
-* 
+*
 * The above copyright notice and this permission notice shall be
 * included in all copies or substantial portions of the Software.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -1938,7 +1938,7 @@ new function () {
             var x = _StepLengthX * position * (orientation & 1);
             var y = _StepLengthY * position * ((orientation >> 1) & 1);
 
-            if ($Jssor$.$IsBrowserChrome() && $Jssor$.$BrowserVersion() < 38) {
+            if ($Jssor$.$IsBrowserChrome() /*&& $Jssor$.$BrowserVersion() < 38*/) {
                 x = x.toFixed(3);
                 y = y.toFixed(3);
             }
@@ -1947,10 +1947,10 @@ new function () {
                 y = Math.round(y);
             }
 
-            if ($Jssor$.$IsBrowserIE() && $Jssor$.$BrowserVersion() >= 10 && $Jssor$.$BrowserVersion() < 11) {
+            if ($Jssor$.$IsBrowserIE() && $Jssor$.$BrowserVersion() >= 10 /*&& $Jssor$.$BrowserVersion() < 11*/) {
                 elmt.style.msTransform = "translate(" + x + "px, " + y + "px)";
             }
-            else if ($Jssor$.$IsBrowserChrome() && $Jssor$.$BrowserVersion() >= 30 && $Jssor$.$BrowserVersion() < 34) {
+            else if ($Jssor$.$IsBrowserChrome() && $Jssor$.$BrowserVersion() >= 30 /*&& $Jssor$.$BrowserVersion() < 50*/) {
                 elmt.style.WebkitTransition = "transform 0s";
                 elmt.style.WebkitTransform = "translate3d(" + x + "px, " + y + "px, 0px) perspective(2000px)";
             }
