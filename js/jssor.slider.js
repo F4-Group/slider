@@ -31,6 +31,38 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+//function from http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
+var $Jssor3d2d$ = (function () {
+    var el = document.createElement('p'),
+    has3d,
+    has2d,
+    transforms = {
+        'webkitTransform':'-webkit-transform',
+        'OTransform':'-o-transform',
+        'msTransform':'-ms-transform',
+        'MozTransform':'-moz-transform',
+        'transform':'transform'
+    };
+
+    //Add it to the body to get the computed style
+    document.body.insertBefore(el, null);
+
+    for (var t in transforms) {
+        if (el.style[t] !== undefined) {
+            el.style[t] = 'translate3d(1px,1px,1px)';
+            has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+            el.style[t] = 'translate(1px,1px)';
+            has2d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+        }
+    }
+    document.body.removeChild(el);
+
+    return {
+        has3d: (has3d !== undefined && has3d.length > 0 && has3d !== "none"),
+        has2d: (has2d !== undefined && has2d.length > 0 && has2d !== "none")
+    };
+})();
+
 var $JssorSlider$;
 var $JssorSlideshowFormations$ = window.$JssorSlideshowFormations$ = {};
 var $JssorSlideshowRunner$;
@@ -1673,7 +1705,6 @@ new function () {
 
             _SelfSlideItem.$OnInnerOffsetChange = function (oldOffset, newOffset) {
                 var slidePosition = _DisplayPieces - newOffset;
-
                 SetPosition(_Wrapper, slidePosition);
 
                 //following lines are for future usage, not ready yet
@@ -1938,7 +1969,7 @@ new function () {
             var x = _StepLengthX * position * (orientation & 1);
             var y = _StepLengthY * position * ((orientation >> 1) & 1);
 
-            if ($Jssor$.$IsBrowserChrome() /*&& $Jssor$.$BrowserVersion() < 38*/) {
+            if ($Jssor$.$IsBrowserChrome()) {
                 x = x.toFixed(3);
                 y = y.toFixed(3);
             }
@@ -1947,12 +1978,29 @@ new function () {
                 y = Math.round(y);
             }
 
-            if ($Jssor$.$IsBrowserIE() && $Jssor$.$BrowserVersion() >= 10 /*&& $Jssor$.$BrowserVersion() < 11*/) {
-                elmt.style.msTransform = "translate(" + x + "px, " + y + "px)";
+            var style = elmt.style;
+            if ($Jssor$.$IsBrowserIE() && $Jssor$.$BrowserVersion() >= 10) {
+                style.transform = style.msTransform = "translate(" + x + "px, " + y + "px)";
             }
-            else if ($Jssor$.$IsBrowserChrome() && $Jssor$.$BrowserVersion() >= 30 /*&& $Jssor$.$BrowserVersion() < 50*/) {
-                elmt.style.WebkitTransition = "transform 0s";
-                elmt.style.WebkitTransform = "translate3d(" + x + "px, " + y + "px, 0px) perspective(2000px)";
+            else if ($Jssor3d2d$.has3d) {
+                style.transition =
+                style.WebkitTransition =
+                style.msTransition =
+                style.MozTransition =
+                style.OTransition = "transform 0s";
+
+                style.transform =
+                style.WebkitTransform =
+                style.msTransform =
+                style.MozTransform =
+                style.OTransform = "translate3d(" + x + "px, " + y + "px, 0px) perspective(2000px)";
+            }
+            else if ($Jssor3d2d$.has2d) {
+                style.transform =
+                style.WebkitTransform =
+                style.msTransform =
+                style.MozTransform =
+                style.OTransform = "translate(" + x + "px, " + y + "px)";
             }
             else {
                 $Jssor$.$CssLeft(elmt, x);
