@@ -2350,21 +2350,6 @@ new function () {
             }
         }
 
-        function AdjustSlidesContainerSize() {
-            _StyleDef = { $Width: _SlideWidth, $Height: _SlideHeight, $Top: 0, $Left: 0 };
-
-            $Jssor$.$Each(_SlideElmts, function (slideElmt, i) {
-
-                $Jssor$.$SetStyles(slideElmt, _StyleDef);
-                $Jssor$.$CssPosition(slideElmt, "absolute");
-                $Jssor$.$CssOverflow(slideElmt, "hidden");
-
-                $Jssor$.$HideElement(slideElmt);
-            });
-
-            $Jssor$.$SetStyles(_LoadingContainer, _StyleDef);
-        }
-
         function PlayToOffset(offset, slideDuration) {
             PlayTo(offset, slideDuration, true);
         }
@@ -2991,8 +2976,6 @@ new function () {
         {
             _AutoPlay = _Options.$AutoPlay;
             _SelfSlider.$Options = options;
-
-            AdjustSlidesContainerSize();
 
             elmt["jssor-slider"] = true;
 
