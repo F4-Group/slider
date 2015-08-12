@@ -1450,6 +1450,10 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             if (!_LastDragSucceded) {
                 _SelfSlider.$TriggerEvent($JssorSlider$.$EVT_CLICK, slideIndex, event);
             }
+            else
+            {
+                event._LastDragSucceded = _LastDragSucceded;
+            }
         }
 
         function PlayerAvailableEventHandler() {
