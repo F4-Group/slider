@@ -1,54 +1,54 @@
 ﻿/// <reference path="Jssor.js" />
 
 /*
-* Jssor.Slider 19.0
-* http://www.jssor.com/
-*
-* Licensed under the MIT license:
-* http://www.opensource.org/licenses/MIT
-*
-* TERMS OF USE - Jssor.Slider
-*
-* Copyright 2014 Jssor
-*
-* Permission is hereby granted, free of charge, to any person obtaining
-* a copy of this software and associated documentation files (the
-* "Software"), to deal in the Software without restriction, including
-* without limitation the rights to use, copy, modify, merge, publish,
-* distribute, sublicense, and/or sell copies of the Software, and to
-* permit persons to whom the Software is furnished to do so, subject to
-* the following conditions:
-*
-* The above copyright notice and this permission notice shall be
-* included in all copies or substantial portions of the Software.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-* NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-* LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-* OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+ * Jssor.Slider 19.0
+ * http://www.jssor.com/
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ *
+ * TERMS OF USE - Jssor.Slider
+ *
+ * Copyright 2014 Jssor
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 //function from http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
 var $Jssor3d2d$ = (function () {
     var el = document.createElement('p'),
-    has3d,
-    has2d,
-    transforms = {
-        'webkitTransform':'-webkit-transform',
-        'OTransform':'-o-transform',
-        'msTransform':'-ms-transform',
-        'MozTransform':'-moz-transform',
-        'transform':'transform'
-    };
+        has3d,
+        has2d,
+        transforms = {
+            'webkitTransform': '-webkit-transform',
+            'OTransform': '-o-transform',
+            'msTransform': '-ms-transform',
+            'MozTransform': '-moz-transform',
+            'transform': 'transform'
+        };
 
     //Add it to the body to get the computed style
     document.body.insertBefore(el, null);
 
     for (var t in transforms) {
-        if (el.style[t] !== undefined) {
+        if (el.style[t] !== undefined) {
             el.style[t] = 'translate3d(1px,1px,1px)';
             has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
             el.style[t] = 'translate(1px,1px)';
@@ -482,7 +482,9 @@ var $JssorSlideshowFormations$ = window.$JssorSlideshowFormations$ = new functio
                             C++;
                             break;
                         case ASSEMBLY_LEFT_BOTTOM:
-                        case ASSEMBLY_RIGHT_TOP: R = rl; C--;
+                        case ASSEMBLY_RIGHT_TOP:
+                            R = rl;
+                            C--;
                             break;
                         case ASSEMBLY_RIGHT_BOTTOM:
                         case ASSEMBLY_LEFT_TOP:
@@ -644,7 +646,7 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
             $Reverse: false,    //Reverse the assembly or not
             $Formation: $JssorSlideshowFormations$.$FormationRandom,    //Shape that assembly blocks as
             $Assembly: 0x0408,   //The way to assembly blocks ASSEMBLY_RIGHT_BOTTOM
-            $ChessMode: { $Column: 0, $Row: 0 },    //Chess move or fly direction
+            $ChessMode: {$Column: 0, $Row: 0},    //Chess move or fly direction
             $Easing: $JssorEasing$.$EaseSwing,  //Specify variation of speed during transition
             $Round: {},
             $Blocks: [],
@@ -655,7 +657,7 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
 
         slideshowTransition.$Count = slideshowTransition.$Cols * slideshowTransition.$Rows;
         if ($Jssor$.$IsFunction(slideshowTransition.$Easing))
-            slideshowTransition.$Easing = { $Default: slideshowTransition.$Easing };
+            slideshowTransition.$Easing = {$Default: slideshowTransition.$Easing};
 
         slideshowTransition.$FramesCount = Math.ceil(slideshowTransition.$Duration / slideshowTransition.$Interval);
 
@@ -664,10 +666,15 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
             height /= slideshowTransition.$Rows;
             var wh = width + 'x' + height;
             if (!slideshowTransition.$Blocks[wh]) {
-                slideshowTransition.$Blocks[wh] = { $Width: width, $Height: height };
+                slideshowTransition.$Blocks[wh] = {$Width: width, $Height: height};
                 for (var col = 0; col < slideshowTransition.$Cols; col++) {
                     for (var r = 0; r < slideshowTransition.$Rows; r++)
-                        slideshowTransition.$Blocks[wh][r + ',' + col] = { $Top: r * height, $Right: col * width + width, $Bottom: r * height + height, $Left: col * width };
+                        slideshowTransition.$Blocks[wh][r + ',' + col] = {
+                            $Top: r * height,
+                            $Right: col * width + width,
+                            $Bottom: r * height + height,
+                            $Left: col * width
+                        };
                 }
             }
 
@@ -681,6 +688,7 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
 
         return slideshowTransition;
     }
+
     //#endregion
 
     //#region Private Classes
@@ -718,6 +726,7 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
             return transition.$Reverse ? formationInstance.reverse() : formationInstance;
 
         }
+
         //#endregion
 
         _Self.$EndTime = _EndTime;
@@ -768,7 +777,9 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
         {
             slideElement = $Jssor$.$CloneNode(slideElement);
             //$Jssor$.$RemoveAttribute(slideElement, "id");
-            DisableHWA(slideElement);
+
+            if (!_Options.$HWA)
+                DisableHWA(slideElement);
             if ($Jssor$.$IsBrowserIe9Earlier()) {
                 var hasImage = !slideElement["no-image"];
                 var slideChildElements = $Jssor$.$FindChildrenByTag(slideElement);
@@ -825,7 +836,13 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
                         slideTransition.$Clip = topBenchmark || bottomBenchmark || leftBenchmark || rightBenchmark;
 
                         _StyleDif = {};
-                        _StyleEnd = { $Top: 0, $Left: 0, $Opacity: 1, $Width: slideContainerWidth, $Height: slideContainerHeight };
+                        _StyleEnd = {
+                            $Top: 0,
+                            $Left: 0,
+                            $Opacity: 1,
+                            $Width: slideContainerWidth,
+                            $Height: slideContainerHeight
+                        };
                         _StyleStart = $Jssor$.$Extend({}, _StyleEnd);
                         _Block = $Jssor$.$Extend({}, _Blocks[columnRow]);
 
@@ -924,7 +941,11 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
                         _AnimationStylesArrs[columnRow].$Max = virtualFrameCount + framesCount - 1;
 
                         for (var frameN = 0; frameN <= framesCount; frameN++) {
-                            var styleFrameN = $Jssor$.$Cast(_StyleStart, _StyleDif, frameN / framesCount, slideTransition.$Easing, slideTransition.$During, slideTransition.$Round, { $Move: slideTransition.$Move, $OriginalWidth: slideContainerWidth, $OriginalHeight: slideContainerHeight })
+                            var styleFrameN = $Jssor$.$Cast(_StyleStart, _StyleDif, frameN / framesCount, slideTransition.$Easing, slideTransition.$During, slideTransition.$Round, {
+                                $Move: slideTransition.$Move,
+                                $OriginalWidth: slideContainerWidth,
+                                $OriginalHeight: slideContainerHeight
+                            })
 
                             styleFrameN.$ZIndex = styleFrameN.$ZIndex || 1;
 
@@ -976,6 +997,7 @@ var $JssorSlideshowRunner$ = window.$JssorSlideshowRunner$ = function (slideCont
 
         _SelfSlideshowProcessor.$Transition = _SlideshowTransition;
     }
+
     //#endregion
 
     //member functions
@@ -1085,7 +1107,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             var slideIndex = GetRealIndex(virtualIndex);
             var slidePosition = positionDisplay - Math.floor(positionDisplay);
 
-            return { $Index: slideIndex, $VirtualIndex: virtualIndex, $Position: slidePosition };
+            return {$Index: slideIndex, $VirtualIndex: virtualIndex, $Position: slidePosition};
         };
 
         _SelfConveyor.$OnPositionChange = function (oldPosition, newPosition) {
@@ -1099,13 +1121,14 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             _SelfSlider.$TriggerEvent($JssorSlider$.$EVT_POSITION_CHANGE, GetRealIndex(newPosition), GetRealIndex(oldPosition), newPosition, oldPosition);
         };
     }
+
     //Conveyor
 
     //Carousel
     function Carousel() {
         var _SelfCarousel = this;
 
-        $JssorAnimator$.call(_SelfCarousel, 0, 0, { $LoopLength: _SlideCount });
+        $JssorAnimator$.call(_SelfCarousel, 0, 0, {$LoopLength: _SlideCount});
 
         //Carousel Constructor
         {
@@ -1116,6 +1139,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             });
         }
     }
+
     //Carousel
 
     //Slideshow
@@ -1123,7 +1147,11 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
         var _SelfSlideshow = this;
         var _Wrapper = _SlideContainer.$Elmt;
 
-        $JssorAnimator$.call(_SelfSlideshow, -1, 2, { $Easing: $JssorEasing$.$EaseLinear, $Setter: { $Position: SetPosition }, $LoopLength: _SlideCount }, _Wrapper, { $Position: 1 }, { $Position: -2 });
+        $JssorAnimator$.call(_SelfSlideshow, -1, 2, {
+            $Easing: $JssorEasing$.$EaseLinear,
+            $Setter: {$Position: SetPosition},
+            $LoopLength: _SlideCount
+        }, _Wrapper, {$Position: 1}, {$Position: -2});
 
         _SelfSlideshow.$Wrapper = _Wrapper;
 
@@ -1134,6 +1162,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             });
         }
     }
+
     //Slideshow
 
     //CarouselPlayer
@@ -1145,7 +1174,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
         var _StandBy;
         var _StandByPosition;
 
-        $JssorAnimator$.call(_SelfCarouselPlayer, -100000000, 200000000, { $IntervalMax: 100 });
+        $JssorAnimator$.call(_SelfCarouselPlayer, -100000000, 200000000, {$IntervalMax: 100});
 
         _SelfCarouselPlayer.$OnStart = function () {
             _IsSliding = true;
@@ -1226,6 +1255,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             _Conveyor.$Combine(slideshow);
         }
     }
+
     //CarouselPlayer
 
     //SlideContainer
@@ -1248,6 +1278,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             $Jssor$.$Empty(elmt);
         };
     }
+
     //SlideContainer
 
     //SlideItem
@@ -1281,7 +1312,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
 
         var _SequenceNumber;    //for debug only
 
-        $JssorAnimator$.call(_SelfSlideItem, -_DisplayPieces, _DisplayPieces + 1, { $SlideItemAnimator: true });
+        $JssorAnimator$.call(_SelfSlideItem, -_DisplayPieces, _DisplayPieces + 1, {$SlideItemAnimator: true});
 
         function ResetCaptionSlider(fresh) {
             _CaptionSliderOut && _CaptionSliderOut.$Revert();
@@ -1450,8 +1481,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             if (!_LastDragSucceded) {
                 _SelfSlider.$TriggerEvent($JssorSlider$.$EVT_CLICK, slideIndex, event);
             }
-            else
-            {
+            else {
                 event._LastDragSucceded = _LastDragSucceded;
             }
         }
@@ -1674,7 +1704,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
                 //    $Jssor$.$Attribute(childElement, "jssor-content", true);
                 //}
 
-                RefreshContent(childElement, fresh, level +1);
+                RefreshContent(childElement, fresh, level + 1);
             });
         }
 
@@ -1763,6 +1793,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             });
         }
     }
+
     //SlideItem
 
     //Processor
@@ -1931,6 +1962,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             _ProgressEnd = _SelfProcessor.$GetPosition_OuterEnd();
         }
     }
+
     //Processor
     //#endregion
 
@@ -1939,44 +1971,49 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
         var x = _StepLengthX * position * (orientation & 1);
         var y = _StepLengthY * position * ((orientation >> 1) & 1);
 
-            if ($Jssor$.$IsBrowserChrome()) {
-                x = x.toFixed(3);
-                y = y.toFixed(3);
-            }
-            else {
-                x = Math.round(x);
-                y = Math.round(y);
-            }
+        if (_Options.$HWA && $Jssor$.$IsBrowserChrome()) {
+            x = x.toFixed(3);
+            y = y.toFixed(3);
+        }
+        else {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
 
+        if (!_Options.$HWA) {
+            $Jssor$.$CssLeft(elmt, x);
+            $Jssor$.$CssTop(elmt, y);
+        } else {
             var style = elmt.style;
             if ($Jssor$.$IsBrowserIE() && $Jssor$.$BrowserVersion() >= 10) {
                 style.transform = style.msTransform = "translate(" + x + "px, " + y + "px)";
             }
             else if ($Jssor3d2d$.has3d) {
                 style.transition =
-                style.WebkitTransition =
-                style.msTransition =
-                style.MozTransition =
-                style.OTransition = "transform 0s";
+                    style.WebkitTransition =
+                        style.msTransition =
+                            style.MozTransition =
+                                style.OTransition = "transform 0s";
 
                 style.transform =
-                style.WebkitTransform =
-                style.msTransform =
-                style.MozTransform =
-                style.OTransform = "translate3d(" + x + "px, " + y + "px, 0px) perspective(2000px)";
+                    style.WebkitTransform =
+                        style.msTransform =
+                            style.MozTransform =
+                                style.OTransform = "translate3d(" + x + "px, " + y + "px, 0px) perspective(2000px)";
             }
             else if ($Jssor3d2d$.has2d) {
                 style.transform =
-                style.WebkitTransform =
-                style.msTransform =
-                style.MozTransform =
-                style.OTransform = "translate(" + x + "px, " + y + "px)";
+                    style.WebkitTransform =
+                        style.msTransform =
+                            style.MozTransform =
+                                style.OTransform = "translate(" + x + "px, " + y + "px)";
             }
             else {
                 $Jssor$.$CssLeft(elmt, x);
                 $Jssor$.$CssTop(elmt, y);
             }
         }
+    }
 
     //#region Event handling begin
 
@@ -2087,7 +2124,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
 
             if (event.type != "mousemove") {
                 var touch = event.touches[0];
-                actionPoint = { x: touch.clientX, y: touch.clientY };
+                actionPoint = {x: touch.clientX, y: touch.clientY};
             }
             else {
                 actionPoint = $Jssor$.$MousePosition(event);
@@ -2216,6 +2253,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
             }
         }
     }
+
     //#endregion
 
     function SetCurrentSlideIndex(index) {
@@ -2341,7 +2379,7 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
     }
 
     function AdjustSlidesContainerSize() {
-        _StyleDef = { $Width: _SlideWidth, $Height: _SlideHeight, $Top: 0, $Left: 0 };
+        _StyleDef = {$Width: _SlideWidth, $Height: _SlideHeight, $Top: 0, $Left: 0};
 
         $Jssor$.$Each(_SlideElmts, function (slideElmt, i) {
 
@@ -2744,23 +2782,27 @@ var $JssorSlider$ = window.$JssorSlider$ = function (elmt, options) {
     //Sodo statement for development time intellisence only
     $JssorDebug$.$Execute(function () {
         _Options = $Jssor$.$Extend({
-            $ArrowKeyNavigation: undefined,
-            $SlideWidth: undefined,
-            $SlideHeight: undefined,
-            $SlideshowOptions: undefined,
-            $CaptionSliderOptions: undefined,
-            $BulletNavigatorOptions: undefined,
-            $ArrowNavigatorOptions: undefined,
-            $ThumbnailNavigatorOptions: undefined
-        },
-        _Options);
+                $ArrowKeyNavigation: undefined,
+                $SlideWidth: undefined,
+                $SlideHeight: undefined,
+                $SlideshowOptions: undefined,
+                $CaptionSliderOptions: undefined,
+                $BulletNavigatorOptions: undefined,
+                $ArrowNavigatorOptions: undefined,
+                $ThumbnailNavigatorOptions: undefined
+            },
+            _Options);
     });
 
     var _PlayOrientation = _Options.$PlayOrientation & 3;
     var _PlayReverse = (_Options.$PlayOrientation & 4) / -4 || 1;
 
     var _SlideshowOptions = _Options.$SlideshowOptions;
-    var _CaptionSliderOptions = $Jssor$.$Extend({ $Class: $JssorCaptionSliderBase$, $PlayInMode: 1, $PlayOutMode: 1 }, _Options.$CaptionSliderOptions);
+    var _CaptionSliderOptions = $Jssor$.$Extend({
+        $Class: $JssorCaptionSliderBase$,
+        $PlayInMode: 1,
+        $PlayOutMode: 1
+    }, _Options.$CaptionSliderOptions);
     //$Jssor$.$TranslateTransitions(_CaptionSliderOptions.$CaptionTransitions); //for old transition compatibility
     var _BulletNavigatorOptions = _Options.$BulletNavigatorOptions;
     var _ArrowNavigatorOptions = _Options.$ArrowNavigatorOptions;
@@ -3719,7 +3761,17 @@ var $JssorCaptionSlider$ = window.$JssorCaptionSlider$ = function (container, ca
     var _PlayMode = playIn ? captionSlideOptions.$PlayInMode : captionSlideOptions.$PlayOutMode;
 
     var _CaptionTransitions = captionSlideOptions.$CaptionTransitions;
-    var _CaptionTuningFetcher = { $Transition: "t", $Delay: "d", $Duration: "du", x: "x", y: "y", $Rotate: "r", $Zoom: "z", $Opacity: "f", $BeginTime: "b" };
+    var _CaptionTuningFetcher = {
+        $Transition: "t",
+        $Delay: "d",
+        $Duration: "du",
+        x: "x",
+        y: "y",
+        $Rotate: "r",
+        $Zoom: "z",
+        $Opacity: "f",
+        $BeginTime: "b"
+    };
     var _CaptionTuningTransfer = {
         $Default: function (value, tuningValue) {
             if (!isNaN(tuningValue.$Value))
@@ -3844,7 +3896,7 @@ var $JssorCaptionSlider$ = window.$JssorCaptionSlider$ = function (container, ca
                         rawTransition = FetchRawTransition(captionElmt, j);
 
                         if (j == 2 && !rawTransition.$Transition) {
-                            rawTransition.$Delay = rawTransition.$Delay || { $Value: 0 };
+                            rawTransition.$Delay = rawTransition.$Delay || {$Value: 0};
                             rawTransition = $Jssor$.$Extend(FetchRawTransition(captionElmt, 0), rawTransition);
                         }
                     }
@@ -3856,7 +3908,7 @@ var $JssorCaptionSlider$ = window.$JssorCaptionSlider$ = function (container, ca
                         if (transition) {
 
                             //var transitionWithTuning = $Jssor$.$Extend({ $Delay: 0, $ScaleHorizontal: 1, $ScaleVertical: 1 }, transition);
-                            var transitionWithTuning = $Jssor$.$Extend({ $Delay: 0 }, transition);
+                            var transitionWithTuning = $Jssor$.$Extend({$Delay: 0}, transition);
 
                             $Jssor$.$Each(rawTransition, function (rawPropertyValue, propertyName) {
                                 var tuningPropertyValue = (_CaptionTuningTransfer[propertyName] || _CaptionTuningTransfer.$Default).apply(_CaptionTuningTransfer, [transitionWithTuning[propertyName], rawTransition[propertyName]]);
@@ -3935,9 +3987,9 @@ var $JssorCaptionSlider$ = window.$JssorCaptionSlider$ = function (container, ca
             difStyles.$Rotate = rotate * 360;
             fromStyles.$Rotate = 0;
         }
-            //Clip
+        //Clip
         else if (transition.$Clip) {
-            var fromStyleClip = { $Top: 0, $Right: captionItemWidth, $Bottom: captionItemHeight, $Left: 0 };
+            var fromStyleClip = {$Top: 0, $Right: captionItemWidth, $Bottom: captionItemHeight, $Left: 0};
             var toStyleClip = $Jssor$.$Extend({}, fromStyleClip);
 
             var blockOffset = toStyleClip.$Offset = {};
@@ -4115,7 +4167,7 @@ var $JssorCaptionSlideo$ = function (container, captionSlideoOptions, playIn) {
                 var transitionName2 = $Jssor$.$AttributeEx(captionElmt, "t2");
                 var transition2 = _CaptionTransitions[$Jssor$.$ParseInt(transitionName2)] || _CaptionTransitions[transitionName2];
 
-                var itemToPlay = { $Elmt: captionElmt, $Transition: transition, $Transition2: transition2 };
+                var itemToPlay = {$Elmt: captionElmt, $Transition: transition, $Transition2: transition2};
                 if (level < 3) {
                     itemsToPlay.concat(GetCaptionItems(captionElmt, level + 1));
                 }
@@ -4185,7 +4237,11 @@ var $JssorCaptionSlideo$ = function (container, captionSlideoOptions, playIn) {
             var captionParentWidth = $Jssor$.$CssWidth(captionParent);
             var captionParentHeight = $Jssor$.$CssHeight(captionParent);
 
-            var lastStyles = { $Zoom: 1, $Rotate: 0, $Clip: { $Top: 0, $Right: captionItemWidth, $Bottom: captionItemHeight, $Left: 0 } };
+            var lastStyles = {
+                $Zoom: 1,
+                $Rotate: 0,
+                $Clip: {$Top: 0, $Right: captionItemWidth, $Bottom: captionItemHeight, $Left: 0}
+            };
 
             lastStyles = CreateAnimator(captionElmt, captionItem.$Transition, lastStyles, true);
             CreateAnimator(captionElmt, captionItem.$Transition2, lastStyles, false);
