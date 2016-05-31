@@ -47,12 +47,16 @@ var $Jssor3d2d$ = (function () {
     //Add it to the body to get the computed style
     document.body.insertBefore(el, null);
 
-    for (var t in transforms) {
-        if (el.style[t] !== undefined) {
-            el.style[t] = 'translate3d(1px,1px,1px)';
-            has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
-            el.style[t] = 'translate(1px,1px)';
-            has2d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
+    var computedStyle = window.getComputedStyle(el);
+    //computedStyle might be null - https://bugzilla.mozilla.org/show_bug.cgi?id=548397
+    if (computedStyle) {
+        for (var t in transforms) {
+            if (el.style[t] !== undefined) {
+                el.style[t] = 'translate3d(1px,1px,1px)';
+                has3d = computedStyle.getPropertyValue(transforms[t]);
+                el.style[t] = 'translate(1px,1px)';
+                has2d = computedStyle.getPropertyValue(transforms[t]);
+            }
         }
     }
     document.body.removeChild(el);
